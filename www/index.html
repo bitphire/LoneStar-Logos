@@ -54,7 +54,7 @@
 						var to = 'sjones@lonestarlogos.com';
 						var data = getFormData($(this));
 
-						var subject = "WVI For " + data["textinput_name"];
+						var subject = "WVI For " + data["textinput_name"] + " [VIN: " + data["textinput_vin"] + "]";
 						var body = "Driver: " + data["textinput_name"]
 							+ "<br />Last 4 Of VIN #: " + data["textinput_vin"]
 							+ "<br />Mileage: " + data["textinput_mileage"]
