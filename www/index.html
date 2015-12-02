@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="msapplication-tap-highlight" content="no" />
+		<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+		
+		<link rel="stylesheet" href="css/themes/lonestar.min.css" />
+		<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+		
+		
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+		<title>Weekly Vehicle Inspection - LoneStar Logos</title>
+		<script type="text/javascript" src="cordova.js"></script>
+		
+		<script>
+			$( document ).ready(function() {
+				function getFormData($form){
+					var unindexed_array = $form.serializeArray();
+					var indexed_array = {};
+					$.map(unindexed_array, function(n, i){
+						indexed_array[n['name']] = n['value'];
+					});
+					return indexed_array;
+				}
+				
+				document.addEventListener('deviceready', function () {
+					// cordova.plugins.email is now available
+					$('#vi').submit(function() {
+						var to = 'sjones@lonestarlogos.com';
+						var data = getFormData($(this));
+
+						var subject = "WVI For " + data["textinput_name"];
+						var body = "Driver: " + data["textinput_name"]
+							+ "\nLast 4 Of VIN #: " + data["textinput_vin"]
+							+ "\nMileage: " + data["textinput_mileage"]
+							+ data["slider-flip-b"] + "\n  Visual Inspection for Exterior Damage / Leaks under the vehicle\n"
+							+ data["slider-flip-wipers"] + "  Check Windshield Wipers / Washers\n"
+							+ data["slider-flip-mirrors"] + "  Check Mirrors for Damage and Adjustments\n"
+							+ data["slider-flip-lights"] + "  Check Highbeams / Signal Lights / 4-Way Flashers / Tail Lights / Reverse Lights\n"
+							+ data["slider-flip-fak"] + "  Check First Aide Kit\n"
+							+ data["slider-flip-ag"] + "  Check Air Guage\n"
+							+ data["slider-flip-fe"] + "  Check Fire Extenguisher\n"
+							+ data["slider-flip-horn"] + "  Check Horn\n"
+							+ data["slider-flip-ec"] + "  Check Inside of Engine compartment for any leaks or loose items\n"
+							+ data["slider-flip-o"] + "  Oil Level\n"
+							+ data["slider-flip-ps"] + "  Power Steering Level\n"
+							+ data["slider-flip-c"] + "  Coolant Level\n"
+							+ data["slider-flip-w"] + "  Washer Fluid Level\n"
+							+ data["slider-flip-t"] + "  Transmission Fluid Level (Check Hot)\n"
+							+ "Left Front PSI: " + data["lf_tire"]
+							+ "\nRight Front PSI: " + data["rf_tire"]
+							+ "\nLeft Rear PSI: " + data["lr_tire"]
+							+ "\nLeft Rear Inner PSI: " + data["lri_tire"]
+							+ "\nRight Rear PSI: " + data["rr_tire"]
+							+ "\nRight Rear Inner PSI: " + data["rri_tire"]
+							+ "\nLeft Front PSI: " + data["tlf_tire"]
+							+ "\nLeft Front Inner PSI: " + data["tlfi_tire"]
+							+ "\nRight Front PSI: " + data["trf_tire"]
+							+ "\nRight Front Inner PSI: " + data["trfi_tire"]
+							+ "\nLeft Rear PSI: " + data["tlr_tire"]
+							+ "\nLeft Rear Inner PSI: " + data["tlri_tire"]
+							+ "\nRight Rear PSI: " + data["trr_tire"]
+							+ "\nRight Rear Inner PSI: " + data["trri_tire"];
+						
+						cordova.plugins.email.open({
+							to: to,
+							subject: subject,
+							body:    body
+						});
+					});
+				}, false);
+				
+				// Lets disable form elements until needed
+			//	$('.dually').slider('disable');
+				$('.dually2').hide(1000);
+			//	$('.trailer').slider('disable');
+				$('.trailer2').hide(1000);
+				
+				$("#slider-flip-dually").bind("change", function() {
+					alert("hi");
+					if ($("#slider-flip-dually option:selected").attr('value') == "OK") {
+			//			$(".dually").slider('enable');
+						$('.dually2').show(1000);
+					} else {
+			//			$('.dually').slider('disable');
+						$('.dually2').hide(1000);
+					}
+				});
+				
+				$("#slider-flip-trailer").bind("change", function() {
+					if ($("#slider-flip-trailer option:selected").attr('value') == "OK") {
+			//			$(".trailer").slider('enable');
+						$('.trailer2').show(1000);
+					} else {
+			//			$('.trailer').slider('disable');
+						$('.trailer2').hide(1000);
+					}
+				});
+			
+				$('.dually').slider('refresh');
+				$('.trailer').slider('refresh');
+			});
+		</script>
+		<style>
+			.my_label {
+				font-size: 1.2em;
+				margin-left: 3px;
+				display: inline-block;
+				vertical-align: top;
+			}
+		</style>
+	</head>
+	<body>
+		<div data-role="page" id="home">
+			<div data-role="header">
+				<h1>Home</h1>
+			</div><!-- /header -->
+
+			<div role="main" class="ui-content">
+				<p><a href="#wvi">Weekly Vehicle Maintence</a></p>
+				<p><a href="#offsets">Offsets</a></p>
+			</div>
+			
+			<div data-role="footer">
+				<h4>Longhorn Sign Company</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+			
+		<!-- Start of WVI page -->
+		<div data-role="page" id="wvi">
+			<div data-role="header">
+				<h1>Weekly Vehicle Inspection</h1>
+			</div><!-- /header -->
+
+			<div role="main" class="ui-content">
+				<form id="vi" action="#!" method="post">
+				<!-- Name, Last 4 VIN, Mileage -->
+					<div class="ui-field-contain">
+						<label for="textinput_name" class="ui-hidden-accessible">Driver's Name:</label>
+						<input type="text" name="textinput_name" id="textinput_name" placeholder="Driver's Name" value="">
+					</div>
+					<div class="ui-field-contain">
+						<label for="textinput_vin" class="ui-hidden-accessible">Last 4 of VIN:</label>
+						<input type="number" name="textinput_vin" id="textinput_vin" placeholder="Last 4 digits of VIN" value="">
+					</div>
+					<div class="ui-field-contain">
+						<label for="textinput_mileage" class="ui-hidden-accessible">Mileage:</label>
+						<input type="number" name="textinput_mileage" id="textinput_mileage" placeholder="Mileage" value="">
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-b" class="ui-hidden-accessible">Visual Inspection for Exterior Damage / Leaks under the vehicle</label>
+						<select name="slider-flip-b" id="slider-flip-b" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Visual Inspection for Exterior Damage / Leaks under the vehicle</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-wipers" class="ui-hidden-accessible">Check Windshield Wipers / Washers</label>
+						<select name="slider-flip-wipers" id="slider-flip-wipers" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Check Windshield Wipers / Washers</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-mirrors" class="ui-hidden-accessible">Check Mirrors for Damage and Adjustments</label>
+						<select name="slider-flip-mirrors" id="slider-flip-mirrors" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Check Mirrors for Damage and Adjustments</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-lights" class="ui-hidden-accessible">Check Highbeams / Signal Lights / 4-Way Flashers / Tail Lights / Reverse Lights</label>
+						<select name="slider-flip-lights" id="slider-flip-lights" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Check Highbeams / Signal Lights / 4-Way Flashers / Tail Lights / Reverse Lights</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-fak" class="ui-hidden-accessible">Check First Aide Kit</label>
+						<select name="slider-flip-fak" id="slider-flip-fak" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Check First Aide Kit</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-ag" class="ui-hidden-accessible">Check Air Guage</label>
+						<select name="slider-flip-ag" id="slider-flip-ag" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Check Air Guage</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-fe" class="ui-hidden-accessible">Check Fire Extinguisher</label>
+						<select name="slider-flip-fe" id="slider-flip-fe" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Check Fire Extinguisher</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-horn" class="ui-hidden-accessible">Check Horn</label>
+						<select name="slider-flip-horn" id="slider-flip-horn" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Check Horn</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-ec" class="ui-hidden-accessible">Check Inside of Engine compartment for any leaks or loose items</label>
+						<select name="slider-flip-ec" id="slider-flip-ec" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Check Inside of Engine compartment for any leaks or loose items</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-o" class="ui-hidden-accessible">Engine Oil Level</label>
+						<select name="slider-flip-o" id="slider-flip-o" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Engine Oil Level</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-ps" class="ui-hidden-accessible">Power Steering Fluid Level</label>
+						<select name="slider-flip-ps" id="slider-flip-ps" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Power Steering Fluid Level</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-c" class="ui-hidden-accessible">Coolant Level</label>
+						<select name="slider-flip-c" id="slider-flip-c" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Coolant Level</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-w" class="ui-hidden-accessible">Washer Fluid Level</label>
+						<select name="slider-flip-w" id="slider-flip-w" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Washer Fluid Level</span>
+					</div>
+					<div class="ui-field-contain">
+						<label for="slider-flip-t" class="ui-hidden-accessible">Transmission Fluid Level (Check Hot)</label>
+						<select name="slider-flip-t" id="slider-flip-t" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+						<span class="my_label">Transmission Fluid Level (Check Hot)</span>
+					</div>
+
+					<!-- Check tire pressure and tread depth -->
+					<!-- Dually Options -->
+					<div class="ui-field-contain">
+						<label for="slider-flip-dually">Is a dually?</label>
+						<select name="slider-flip-dually" id="slider-flip-dually" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+					</div>
+					<div class="ui-field-contain">
+						<label for="lf_tire">Left Front PSI:</label>
+						<input type="range" name="lf_tire" id="lf_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain">
+						<label for="rf_tire">Right Front PSI:</label>
+						<input type="range" name="rf_tire" id="rf_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain">
+						<label for="lr_tire">Left Rear PSI:</label>
+						<input type="range" name="lr_tire" id="lr_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain dually2">
+						<label for="lri_tire">Left Rear (Inner) PSI:</label>
+						<input type="range" class="dually" name="lri_tire" id="lri_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain">
+						<label for="rr_tire">Right Rear PSI:</label>
+						<input type="range" name="rr_tire" id="rr_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain dually2">
+						<label for="rri_tire">Right Rear (Inner) PSI:</label>
+						<input type="range" class="dually" name="rri_tire" id="rri_tire" value="0" min="0" max="120">
+					</div>
+					
+					<!-- Trailer Options -->
+					<div class="ui-field-contain">
+						<label for="slider-flip-trailer">Using a trailer?</label>
+						<select name="slider-flip-trailer" id="slider-flip-trailer" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+					</div>
+					<div class="ui-field-contain trailer2">
+						<label for="slider-flip-b">All lights in good working condition?</label>
+						<select name="slider-flip-b" class="trailer" id="slider-flip-b" data-role="slider" data-mini="true">
+							<option value="X"  selected="">&#10008;</option>
+							<option value="OK">&#10004;</option>
+						</select>
+					</div>
+					<div class="ui-field-contain trailer2">
+						<label for="tlf_tire">Left Front PSI:</label>
+						<input type="range" class="trailer" name="tlf_tire" id="tlf_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain trailer2">
+						<label for="tlfi_tire">Left Front (Inner) PSI:</label>
+						<input type="range" class="trailer" name="tlfi_tire" id="tlfi_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain trailer2">
+						<label for="trf_tire">Right Front PSI:</label>
+						<input type="range" class="trailer" name="trf_tire" id="trf_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain trailer2">
+						<label for="trfi_tire">Right Front (Inner) PSI:</label>
+						<input type="range" class="trailer" name="trfi_tire" id="trfi_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain trailer2">
+						<label for="tlr_tire">Left Rear PSI:</label>
+						<input type="range" class="trailer" name="tlr_tire" id="tlr_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain trailer2">
+						<label for="tlri_tire">Left Rear (Inner) PSI:</label>
+						<input type="range" class="trailer" name="tlri_tire" id="tlri_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain trailer2">
+						<label for="trr_tire">Right Rear PSI:</label>
+						<input type="range" class="trailer" name="trr_tire" id="trr_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain trailer2">
+						<label for="trri_tire">Right Rear (Inner) PSI:</label>
+						<input type="range" class="trailer" name="trri_tire" id="trri_tire" value="0" min="0" max="120">
+					</div>
+					<div class="ui-field-contain">
+						<label for="textarea_comments" class="ui-hidden-accessible">Comments:</label>
+						<textarea name="textarea_comments" id="textarea_comments" placeholder="Additional Comments"></textarea>
+					</div>
+					<div class="ui-field-contain">
+						<input type="submit" name="submit" value="Send" />
+					</div>
+				</form>
+			</div><!-- /content -->
+
+			<div data-role="footer">
+				<h4>Longhorn Sign Company</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id="offsets">
+			<div data-role="header">
+				<h1>Offsets</h1>
+			</div><!-- /header -->
+
+			<div role="main" class="ui-content">
+				<form id="form" class="form" name="offsets" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+					<div class="ui-field-contain" >
+						<label for="sendto">Send To:</label><input type="number" id="sendto" name="sendto" value="5124024914" required>
+					</div>
+					<div class="ui-field-contain field" >
+						<label for="tasknumber">Task #:</label><input type="number" id="tasknumber" name="tasknumber" required>
+					</div>
+					<fieldset data-role="controlgroup">
+						<legend>Direction:</legend>
+						<label for="dir_nb">NB</label>
+						<input type="radio" value="nb" id="dir_nb" name="direction">
+						<label for="dir_sb">SB</label>
+						<input type="radio" value="sb" id="dir_sb" name="direction">
+						<label for="dir_eb">EB</label>
+						<input type="radio" value="eb" id="dir_eb" name="direction">
+						<label for="dir_wb">WB</label>
+						<input type="radio" value="wb" id="dir_wb" name="direction">
+					</fieldset>
+					<div class="ui-field-contain field" >
+						<label for="intersection">Intersection:</label><input type="text" id="intersection" name="intersection">
+					</div>
+					<div class="ui-field-contain field" >
+						<label for="signnumber">Sign #:</label><input type="text" id="signnumber" name="signnumber" required>
+					</div>
+					<div class="ui-field-contain field" >
+						<label for="offset1">Offset 1:</label><input type="number" id="ofsset1" name="offset1" required>
+					</div>
+					<div class="ui-field-contain field" >
+						<label for="offset2">Offset 2:</label><input type="number" id="offset2" name="offset2">
+					</div>
+					<div class="ui-field-contain field" >
+						<label for="ts">ts</label><input type="datetime-local" id="ts" name="ts" required disabled>
+					</div>
+					<div class="ui-field-contain field" >
+						<input type="submit" value="Send" name="submit_offsets"></div>
+					</div>
+				</form>
+			</div>
+			
+			<div data-role="footer">
+				<h4>Longhorn Sign Company</h4>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+		
+		<div data-role="page" id="result">
+			<div data-role="header">
+				<h1>Weekly Vehicle Inspection</h1>
+			</div><!-- /header -->
+
+			<div role="main" class="ui-content">
+				<p>Testing</p>
+			</div>
+			
+			<div data-role="footer">
+				<h4>Longhorn Sign Company</h4>
+			</div><!-- /footer -->
+		</div>
+	</body>
+</html>
