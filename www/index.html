@@ -58,20 +58,20 @@
 						var body = "Driver: " + data["textinput_name"]
 							+ "<br />Last 4 Of VIN #: " + data["textinput_vin"]
 							+ "<br />Mileage: " + data["textinput_mileage"]
-							+ "<br />[" + data["slider-flip-b"] + "] Visual Inspection for Exterior Damage / Leaks under the vehicle<br />"
-							+ data["slider-flip-wipers"] + "  Check Windshield Wipers / Washers<br />"
-							+ data["slider-flip-mirrors"] + "  Check Mirrors for Damage and Adjustments<br />"
-							+ data["slider-flip-lights"] + "  Check Highbeams / Signal Lights / 4-Way Flashers / Tail Lights / Reverse Lights<br />"
-							+ data["slider-flip-fak"] + "  Check First Aide Kit<br />"
-							+ data["slider-flip-ag"] + "  Check Air Guage<br />"
-							+ data["slider-flip-fe"] + "  Check Fire Extenguisher<br />"
-							+ data["slider-flip-horn"] + "  Check Horn<br />"
-							+ data["slider-flip-ec"] + "  Check Inside of Engine compartment for any leaks or loose items<br />"
-							+ data["slider-flip-o"] + "  Oil Level<br />"
-							+ data["slider-flip-ps"] + "  Power Steering Level<br />"
-							+ data["slider-flip-c"] + "  Coolant Level<br />"
-							+ data["slider-flip-w"] + "  Washer Fluid Level<br />"
-							+ data["slider-flip-t"] + "  Transmission Fluid Level (Check Hot)<br />"
+							+ "<br />[" + data["slider-flip-body"] + "] Visual Inspection for Exterior Damage / Leaks under the vehicle<br />"
+							+ "<br />[" + data["slider-flip-wipers"] + "]  Check Windshield Wipers / Washers<br />"
+							+ "<br />[" + data["slider-flip-mirrors"] + "]  Check Mirrors for Damage and Adjustments<br />"
+							+ "<br />[" + data["slider-flip-lights"] + " ] Check Highbeams / Signal Lights / 4-Way Flashers / Tail Lights / Reverse Lights<br />"
+							+ "<br />[" + data["slider-flip-fak"] + " ] Check First Aide Kit<br />"
+							+ "<br />[" + data["slider-flip-ag"] + " ] Check Air Guage<br />"
+							+ "<br />[" + data["slider-flip-fe"] + " ] Check Fire Extenguisher<br />"
+							+ "<br />[" + data["slider-flip-horn"] + "]  Check Horn<br />"
+							+ "<br />[" + data["slider-flip-ec"] + " ] Check Inside of Engine compartment for any leaks or loose items<br />"
+							+ "<br />[" + data["slider-flip-o"] + " ] Oil Level<br />"
+							+ "<br />[" + data["slider-flip-ps"] + "]  Power Steering Level<br />"
+							+ "<br />[" + data["slider-flip-c"] + " ] Coolant Level<br />"
+							+ "<br />[" + data["slider-flip-w"] + "]  Washer Fluid Level<br />"
+							+ "<br />[" + data["slider-flip-t"] + " ] Transmission Fluid Level (Check Hot)<br />"
 							+ "Left Front PSI: " + data["lf_tire"]
 							+ "<br />Right Front PSI: " + data["rf_tire"]
 							+ "<br />Left Rear PSI: " + data["lr_tire"]
@@ -172,8 +172,8 @@
 						<input type="number" name="textinput_mileage" id="textinput_mileage" placeholder="Mileage" value="">
 					</div>
 					<div class="ui-field-contain">
-						<label for="slider-flip-b" class="ui-hidden-accessible">Visual Inspection for Exterior Damage / Leaks under the vehicle</label>
-						<select name="slider-flip-b" id="slider-flip-b" data-role="slider" data-mini="true">
+						<label for="slider-flip-body" class="ui-hidden-accessible">Visual Inspection for Exterior Damage / Leaks under the vehicle</label>
+						<select name="slider-flip-body" id="slider-flip-body" data-role="slider" data-mini="true">
 							<option value="X"  selected="">&#10008;</option>
 							<option value="OK">&#10004;</option>
 						</select>
