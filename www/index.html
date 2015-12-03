@@ -78,6 +78,9 @@
 							+ "<br />Left Rear Inner PSI: " + data["lri_tire"]
 							+ "<br />Right Rear PSI: " + data["rr_tire"]
 							+ "<br />Right Rear Inner PSI: " + data["rri_tire"]
+							+ "<br /><br />"
+							+ "<strong>Trailer:<br />"
+							+ "[" + data["slider-flip-tlights"] + "] Trailer lights in good working condition<br />"
 							+ "<br />Left Front PSI: " + data["tlf_tire"]
 							+ "<br />Left Front Inner PSI: " + data["tlfi_tire"]
 							+ "<br />Right Front PSI: " + data["trf_tire"]
@@ -327,8 +330,8 @@
 						</select>
 					</div>
 					<div class="ui-field-contain trailer2">
-						<label for="slider-flip-b">All lights in good working condition?</label>
-						<select name="slider-flip-b" class="trailer" id="slider-flip-b" data-role="slider" data-mini="true">
+						<label for="slider-flip-tlights">All lights in good working condition?</label>
+						<select name="slider-flip-tlights" class="trailer" id="slider-flip-tlights" data-role="slider" data-mini="true">
 							<option value="X"  selected="">&#10008;</option>
 							<option value="OK">&#10004;</option>
 						</select>
