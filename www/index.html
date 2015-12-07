@@ -108,7 +108,9 @@
 				$("#offsets").ajaxForm({url: 'http://www.bastrophosting.com/add_data.php', type: 'post'})
 				$('#vi').submit(function() {
 					var myData = getFormData($(this));
-					$.post("bastrophosting.com/add_data.php", myData, function(data) {
+					alert(myData);
+					
+					$.post("bastrophosting.com/add_data.php",{'task' : data["tasknumber"], 'direction' : data["direction"], 'intersection' : data["intersection"], 'sign' : data["signnumber"], 'offset1' : data["offset1"], 'offset2' : data["offset2"], 'size' : "7x7"}, function(data) {
 						alert("Data Loaded: " + data);
 					});
 				});
@@ -402,7 +404,7 @@
 						<label for="signnumber">Sign #:</label><input type="text" id="signnumber" name="signnumber" required>
 					</div>
 					<div class="ui-field-contain field" >
-						<label for="offset1">Offset 1:</label><input type="number" id="ofsset1" name="offset1" required>
+						<label for="offset1">Offset 1:</label><input type="number" id="offset1" name="offset1" required>
 					</div>
 					<div class="ui-field-contain field" >
 						<label for="offset2">Offset 2:</label><input type="number" id="offset2" name="offset2">

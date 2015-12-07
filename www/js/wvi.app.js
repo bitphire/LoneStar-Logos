@@ -7,6 +7,11 @@
 		return indexed_array;
 	}
 
+	function sendOffsetsForm($form) {
+		var data = getFormData($form);
+		
+	}
+	
 	function sendWVIForm($form) {
 		var to = 'sjones@lonestarlogos.com';
 		//var data = getFormData($(this));
