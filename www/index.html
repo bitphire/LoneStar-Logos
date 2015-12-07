@@ -43,7 +43,7 @@
 		
 		<script>
 			$( document ).ready(function() {
-				$.fn.serializeObject = function() {
+/*				$.fn.serializeObject = function() {
 					var o = {};
 					var a = this.serializeArray();
 					
@@ -65,16 +65,8 @@
 
 					return false;
 				});
-			
-/*				function getFormData($form){
-					var unindexed_array = $form.serializeArray();
-					var indexed_array = {};
-					$.map(unindexed_array, function(n, i){
-						indexed_array[n['name']] = n['value'];
-					});
-					return indexed_array;
-				}
-*/				
+*/
+
 				document.addEventListener('deviceready', function () {
 					// cordova.plugins.email is now available
 					$('#vi').submit(function() {
@@ -82,34 +74,40 @@
 					});
 				}, false);
 				
-				// Lets disable form elements until needed
-			//	$('.dually').slider('disable');
+				// Lets hide form elements until needed;
 				$('.dually2').hide(1000);
-			//	$('.trailer').slider('disable');
 				$('.trailer2').hide(1000);
 				
 				$("#slider-flip-dually").bind("change", function() {
 					if ($("#slider-flip-dually option:selected").attr('value') == "OK") {
-			//			$(".dually").slider('enable');
 						$('.dually2').show(1000);
 					} else {
-			//			$('.dually').slider('disable');
 						$('.dually2').hide(1000);
 					}
 				});
 				
 				$("#slider-flip-trailer").bind("change", function() {
 					if ($("#slider-flip-trailer option:selected").attr('value') == "OK") {
-			//			$(".trailer").slider('enable');
 						$('.trailer2').show(1000);
 					} else {
-			//			$('.trailer').slider('disable');
 						$('.trailer2').hide(1000);
 					}
 				});
 			
 				$('.dually').slider('refresh');
 				$('.trailer').slider('refresh');
+				
+				
+/******************************************************************************************
+/** Offsets
+/**
+/** Form to fillout and send by SMS and ajax to remote server for display
+/** task, direction, intersection, sign, offset1, offset2, size
+/*****************************************************************************************/
+
+				$("#offsets").ajaxForm({url: 'http://www.bastrophosting.com/add_data.php', type: 'post'})
+				$('#vi').submit(function() {
+				});
 			});
 		</script>
 		<style>
