@@ -72,14 +72,12 @@
 					});
 					
 					$('#offsets').submit(function() {
-					alert("We're in!");
-					var myData = getFormData($(this));
-					alert(myData);
-					
-					$.post("bastrophosting.com/add_data.php",{'task' : data["tasknumber"], 'direction' : data["direction"], 'intersection' : data["intersection"], 'sign' : data["signnumber"], 'offset1' : data["offset1"], 'offset2' : data["offset2"], 'size' : "7x7"}, function(data) {
-						alert("Data Loaded: " + data);
+						var data = getFormData($(this));
+						
+						$.post("bastrophosting.com/add_data.php",{'task' : data["tasknumber"], 'direction' : data["direction"], 'intersection' : data["intersection"], 'sign' : data["signnumber"], 'offset1' : data["offset1"], 'offset2' : data["offset2"], 'size' : "7x7"}, function(data) {
+							alert("Data Loaded: " + data);
+						});
 					});
-				});
 				}, false);
 				
 				// Lets hide form elements until needed;
