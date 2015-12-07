@@ -36,9 +36,33 @@
 		<script src="js/jquery.mobile-1.4.5.min.js"></script>
 		<title>Weekly Vehicle Inspection - LoneStar Logos</title>
 		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="pouchdb-5.1.0.min.js"></script>
 		
 		<script>
 			$( document ).ready(function() {
+				$.fn.serializeObject = function() {
+					var o = {};
+					var a = this.serializeArray();
+					
+					$.each(a, function() {
+						if (o[this.name] !== undefined) {
+							if (!o[this.name].push) {
+								o[this.name] = [o[this.name]];
+							}
+							o[this.name].push(this.value || '');
+						} else {
+							o[this.name] = this.value || '';
+						}
+					});
+					return o;
+				};
+
+				$('#offsets').submit(function() {
+					alert(JSON.stringify($('#offsets').serializeObject()));
+
+					return false;
+				});
+			
 				function getFormData($form){
 					var unindexed_array = $form.serializeArray();
 					var indexed_array = {};
@@ -144,8 +168,8 @@
 			</div><!-- /header -->
 
 			<div role="main" class="ui-content">
-				<p><a href="#wvi">Weekly Vehicle Maintence</a></p>
-				<p><a href="#offsets">Offsets</a></p>
+				<p><a href="#wvi" data-role="button">Weekly Vehicle Maintence</a></p>
+				<p><a href="#offsets" data-role="button">Offsets</a></p>
 			</div>
 			
 			<div data-role="footer">
@@ -389,12 +413,14 @@
 			</div><!-- /header -->
 
 			<div role="main" class="ui-content">
-				<form id="form" class="form" name="offsets" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+				<form id="offsets" method="post" action="#!">
 					<div class="ui-field-contain" >
-						<label for="sendto">Send To:</label><input type="number" id="sendto" name="sendto" value="5124024914" required>
+						<label for="sendto">Send To:</label>
+						<input type="number" id="sendto" name="sendto" value="5124024914" required>
 					</div>
 					<div class="ui-field-contain field" >
-						<label for="tasknumber">Task #:</label><input type="number" id="tasknumber" name="tasknumber" required>
+						<label for="tasknumber">Task #:</label>
+						<input type="number" id="tasknumber" name="tasknumber" required>
 					</div>
 					<fieldset data-role="controlgroup">
 						<legend>Direction:</legend>
