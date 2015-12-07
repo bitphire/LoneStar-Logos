@@ -38,9 +38,7 @@
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/pouchdb-5.1.0.min.js"></script>
 		<script type="text/javascript" src="js/wvi.app.js"></script>
-		<script type="text/javascript" src="js/offsets.app.js"></script>
-		
-		
+
 		<script>
 			$( document ).ready(function() {
 /*				$.fn.serializeObject = function() {
@@ -105,8 +103,9 @@
 /** task, direction, intersection, sign, offset1, offset2, size
 /*****************************************************************************************/
 
-				$("#offsets").ajaxForm({url: 'http://www.bastrophosting.com/add_data.php', type: 'post'})
-				$('#vi').submit(function() {
+				//$("#offsets").ajaxForm({url: 'http://www.bastrophosting.com/add_data.php', type: 'post'})
+				$('#offsets').submit(function() {
+					alert("We're in!");
 					var myData = getFormData($(this));
 					alert(myData);
 					
