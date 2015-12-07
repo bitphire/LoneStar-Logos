@@ -72,11 +72,13 @@
 					});
 					
 					$('#offsets').submit(function() {
+						alert('Step 1');
 						var res = getFormData($(this));
-						
+						alert('Step 2: ' + res["tasknumber"]);
 						$.post("bastrophosting.com/add_data.php",{'task' : res["tasknumber"], 'direction' : res["direction"], 'intersection' : res["intersection"], 'sign' : res["signnumber"], 'offset1' : res["offset1"], 'offset2' : res["offset2"], 'size' : "7x7"}, function(data) {
 							alert("Data Loaded: " + data);
 						});
+						alert('Step 3');
 					});
 				}, false);
 				
