@@ -70,6 +70,16 @@
 					$('#vi').submit(function() {
 						var result = sendWVIForm($(this));
 					});
+					
+					$('#offsets').submit(function() {
+					alert("We're in!");
+					var myData = getFormData($(this));
+					alert(myData);
+					
+					$.post("bastrophosting.com/add_data.php",{'task' : data["tasknumber"], 'direction' : data["direction"], 'intersection' : data["intersection"], 'sign' : data["signnumber"], 'offset1' : data["offset1"], 'offset2' : data["offset2"], 'size' : "7x7"}, function(data) {
+						alert("Data Loaded: " + data);
+					});
+				});
 				}, false);
 				
 				// Lets hide form elements until needed;
@@ -104,15 +114,7 @@
 /*****************************************************************************************/
 
 				//$("#offsets").ajaxForm({url: 'http://www.bastrophosting.com/add_data.php', type: 'post'})
-				$('#offsets').submit(function() {
-					alert("We're in!");
-					var myData = getFormData($(this));
-					alert(myData);
-					
-					$.post("bastrophosting.com/add_data.php",{'task' : data["tasknumber"], 'direction' : data["direction"], 'intersection' : data["intersection"], 'sign' : data["signnumber"], 'offset1' : data["offset1"], 'offset2' : data["offset2"], 'size' : "7x7"}, function(data) {
-						alert("Data Loaded: " + data);
-					});
-				});
+				
 			});
 		</script>
 		<style>
