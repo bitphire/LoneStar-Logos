@@ -107,6 +107,10 @@
 
 				$("#offsets").ajaxForm({url: 'http://www.bastrophosting.com/add_data.php', type: 'post'})
 				$('#vi').submit(function() {
+					var myData = getFormData($(this));
+					$.post("bastrophosting.com/add_data.php", myData, function(data) {
+						alert("Data Loaded: " + data);
+					});
 				});
 			});
 		</script>
