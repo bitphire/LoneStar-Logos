@@ -74,7 +74,7 @@
 					$('#formOffsets').submit(function() {
 						var res = getFormData($('#formOffsets'));
 						var myData = 'task=' + res["tasknumber"] + '&direction=' + res["direction"] + '&intersection=' + res["intersection"] + '&sign=' + res["signnumber"] + '&offset1=' + res["offset1"] + '&offset2=' + res["offset2"] + '&size=' + '7x7';
-
+						alert(res.tasknumber);
 						$.post("bastrophosting.com/lol/add_data.php", 
 								{
 									'task' : res["tasknumber"],
@@ -88,7 +88,7 @@
 						.done(function() {
 							alert( "Success" );
 						})
-						.fail(function((jqXHR, status, error) {
+						.fail(function(jqXHR, status, error) {
 							alert("Err: " + jqXHR.responseText);
 							//alert( "There was an error, try again or send manually!" );
 						})
