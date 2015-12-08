@@ -74,15 +74,9 @@
 					$('#formOffsets').submit(function() {
 						var res = getFormData($('#formOffsets'));
 						var myData = 'task=' + res["tasknumber"] + '&direction=' + res["direction"] + '&intersection=' + res["intersection"] + '&sign=' + res["signnumber"] + '&offset1=' + res["offset1"] + '&offset2=' + res["offset2"] + '&size=' + '7x7';
-						alert(myData);
-						$.ajax({
-							type: "POST",
-							url: "bastrophosting.com/lol/add_data.php",
-							data:	myData
-						});
 
-						$.post("bastrophosting.com/lol/add_data.php", myData
-								/*{
+						$.post("bastrophosting.com/lol/add_data.php", 
+								{
 									'task' : res["tasknumber"],
 									'direction' : res["direction"],
 									'intersection' : res["intersection"],
@@ -90,12 +84,13 @@
 									'offset1' : res["offset1"],
 									'offset2' : res["offset2"],
 									'size' : "7x7"
-								}*/)
+								})
 						.done(function() {
 							alert( "Success" );
 						})
-						.fail(function() {
-							alert( "There was an error, try again or send manually!" );
+						.fail(function((jqXHR, status, error) {
+							alert("Err: " + jqXHR.responseText);
+							//alert( "There was an error, try again or send manually!" );
 						})
 						.always(function() {
 							alert( "Send the Task" );
