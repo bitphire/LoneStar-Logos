@@ -63,16 +63,7 @@
 
 					return false;
 				});
-*/
-				function getFormData1($form){
-					var unindexed_array = $form.serializeArray();
-					var indexed_array = {};
-					$.map(unindexed_array, function(n, i){
-						indexed_array[n['name']] = n['value'];
-					});
-					return indexed_array;
-				}
-	
+*/	
 
 				document.addEventListener('deviceready', function () {
 					// cordova.plugins.email is now available
@@ -80,14 +71,11 @@
 						var result = sendWVIForm($(this));
 					});
 					
-					$('#offsets').submit(function() {
-						alert('Step 1');
-						var res = getFormData1($('#offsets'));
-						alert('Step 2: ' + res["tasknumber"]);
+					$('#formOffsets').submit(function() {
+						var res = getFormData($(this));
 						$.post("bastrophosting.com/add_data.php",{'task' : res["tasknumber"], 'direction' : res["direction"], 'intersection' : res["intersection"], 'sign' : res["signnumber"], 'offset1' : res["offset1"], 'offset2' : res["offset2"], 'size' : "7x7"}, function(data) {
 							alert("Data Loaded: " + data);
 						});
-						alert('Step 3');
 					});
 				}, false);
 				
@@ -387,43 +375,43 @@
 			</div><!-- /header -->
 
 			<div role="main" class="ui-content">
-				<form id="offsets" method="post" action="#!">
+				<form id="formOffsets" method="post" action="#!">
 					<div class="ui-field-contain" >
 						<label for="sendto">Send To:</label>
-						<input type="number" id="sendto" name="sendto" value="5124024914" required>
+						<input type="number" id="sendto" name="sendto" value="5124024914" required />
 					</div>
 					<div class="ui-field-contain field" >
 						<label for="tasknumber">Task #:</label>
-						<input type="number" id="tasknumber" name="tasknumber" required>
+						<input type="number" id="tasknumber" name="tasknumber" required />
 					</div>
 					<fieldset data-role="controlgroup">
 						<legend>Direction:</legend>
 						<label for="dir_nb">NB</label>
-						<input type="radio" value="nb" id="dir_nb" name="direction">
+						<input type="radio" value="nb" id="dir_nb" name="direction" />
 						<label for="dir_sb">SB</label>
-						<input type="radio" value="sb" id="dir_sb" name="direction">
+						<input type="radio" value="sb" id="dir_sb" name="direction" />
 						<label for="dir_eb">EB</label>
-						<input type="radio" value="eb" id="dir_eb" name="direction">
+						<input type="radio" value="eb" id="dir_eb" name="direction" />
 						<label for="dir_wb">WB</label>
-						<input type="radio" value="wb" id="dir_wb" name="direction">
+						<input type="radio" value="wb" id="dir_wb" name="direction" />
 					</fieldset>
 					<div class="ui-field-contain field" >
-						<label for="intersection">Intersection:</label><input type="text" id="intersection" name="intersection">
+						<label for="intersection">Intersection:</label><input type="text" id="intersection" name="intersection" />
 					</div>
 					<div class="ui-field-contain field" >
-						<label for="signnumber">Sign #:</label><input type="text" id="signnumber" name="signnumber" required>
+						<label for="signnumber">Sign #:</label><input type="text" id="signnumber" name="signnumber" required />
 					</div>
 					<div class="ui-field-contain field" >
-						<label for="offset1">Offset 1:</label><input type="number" id="offset1" name="offset1" required>
+						<label for="offset1">Offset 1:</label><input type="number" id="offset1" name="offset1" required />
 					</div>
 					<div class="ui-field-contain field" >
-						<label for="offset2">Offset 2:</label><input type="number" id="offset2" name="offset2">
+						<label for="offset2">Offset 2:</label><input type="number" id="offset2" name="offset2" />
 					</div>
 					<div class="ui-field-contain field" >
-						<label for="ts">ts</label><input type="datetime-local" id="ts" name="ts" required disabled>
+						<label for="ts">ts</label><input type="datetime-local" id="ts" name="ts" />
 					</div>
 					<div class="ui-field-contain field" >
-						<input type="submit" value="Send" name="submit_offsets"></div>
+						<input type="submit" value="Send" name="submit_offsets" /></div>
 					</div>
 				</form>
 			</div>
