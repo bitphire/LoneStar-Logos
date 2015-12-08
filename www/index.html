@@ -78,8 +78,8 @@
 						.done(function() {
 							alert( "second success" );
 						})
-						.fail(function(err) {
-							alert( "error:" +err );
+						.fail(function(xhr, textStatus, errorThrown) {
+							alert(xhr.responseText);
 						})
 						.always(function() {
 							alert( "finished" );
