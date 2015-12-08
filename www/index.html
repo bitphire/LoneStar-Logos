@@ -64,6 +64,15 @@
 					return false;
 				});
 */
+				function getFormData1($form){
+					var unindexed_array = $form.serializeArray();
+					var indexed_array = {};
+					$.map(unindexed_array, function(n, i){
+						indexed_array[n['name']] = n['value'];
+					});
+					return indexed_array;
+				}
+	
 
 				document.addEventListener('deviceready', function () {
 					// cordova.plugins.email is now available
@@ -73,7 +82,7 @@
 					
 					$('#offsets').submit(function() {
 						alert('Step 1');
-						var res = getFormData($('#offsets'));
+						var res = getFormData1($('#offsets'));
 						alert('Step 2: ' + res["tasknumber"]);
 						$.post("bastrophosting.com/add_data.php",{'task' : res["tasknumber"], 'direction' : res["direction"], 'intersection' : res["intersection"], 'sign' : res["signnumber"], 'offset1' : res["offset1"], 'offset2' : res["offset2"], 'size' : "7x7"}, function(data) {
 							alert("Data Loaded: " + data);
