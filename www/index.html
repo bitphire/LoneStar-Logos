@@ -73,16 +73,15 @@
 					
 					$('#formOffsets').submit(function() {
 						var res = getFormData($('#formOffsets'));
-						alert('task: ' + res["tasknumber"] + ', direction: ' + res["direction"] + ', intersection: ' + res["intersection"] + ', sign: ' + res["signnumber"] + ', offset1: ' + res["offset1"] + ', offset2: ' + res["offset2"] + ', size: ' + "7x7");
-						$.post("bastrophosting.com/add_data.php",{'task' : res["tasknumber"], 'direction' : res["direction"], 'intersection' : res["intersection"], 'sign' : res["signnumber"], 'offset1' : res["offset1"], 'offset2' : res["offset2"], 'size' : "7x7"})
+						$.post("bastrophosting.com/lol/add_data.php",{'task' : res["tasknumber"], 'direction' : res["direction"], 'intersection' : res["intersection"], 'sign' : res["signnumber"], 'offset1' : res["offset1"], 'offset2' : res["offset2"], 'size' : "7x7"})
 						.done(function() {
-							alert( "second success" );
+							alert( "Success" );
 						})
-						.fail(function(xhr, textStatus, errorThrown) {
-							alert(xhr.responseText);
+						.fail(function() {
+							alert( "There was an error, try again or send manually!" );
 						})
 						.always(function() {
-							alert( "finished" );
+							alert( "Send the Task" );
 						});
 					});
 				}, false);
