@@ -73,7 +73,7 @@
 					
 					$('#formOffsets').submit(function() {
 						var res = getFormData($('#formOffsets'));
-						$.post("bastrophosting.com/lol/add_data.php",{'task' : res["tasknumber"], 'direction' : res["direction"], 'intersection' : res["intersection"], 'sign' : res["signnumber"], 'offset1' : res["offset1"], 'offset2' : res["offset2"], 'size' : "7x7"})
+						$.post("bastrophosting.com/lol/add_data.php",{task : res["tasknumber"], direction : res["direction"], intersection : res["intersection"], sign : res["signnumber"], offset1 : res["offset1"], offset2 : res["offset2"], size : "7x7"})
 						.done(function() {
 							alert( "Success" );
 						})
