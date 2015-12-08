@@ -73,23 +73,16 @@
 					
 					$('#formOffsets').submit(function() {
 						var res = getFormData($('#formOffsets'));
-						
+						var myData = 'task=' + res["tasknumber"] + '&direction=' + res["direction"] + '&intersection=' + res["intersection"] + '&sign=' + res["signnumber"] + '&offset1=' + res["offset1"] + '&offset2=' + res["offset2"] + '&size=' + '7x7';
+						alert(myData);
 						$.ajax({
 							type: "POST",
 							url: "bastrophosting.com/lol/add_data.php",
-							data:	{
-									'task' : res["tasknumber"],
-									'direction' : res["direction"],
-									'intersection' : res["intersection"],
-									'sign' : res["signnumber"],
-									'offset1' : res["offset1"],
-									'offset2' : res["offset2"],
-									'size' : "7x7"
-								}
+							data:	myData
 						});
 
-/*						$.post("bastrophosting.com/lol/add_data.php",
-								{
+						$.post("bastrophosting.com/lol/add_data.php", myData
+								/*{
 									'task' : res["tasknumber"],
 									'direction' : res["direction"],
 									'intersection' : res["intersection"],
@@ -97,7 +90,7 @@
 									'offset1' : res["offset1"],
 									'offset2' : res["offset2"],
 									'size' : "7x7"
-								})
+								}*/)
 						.done(function() {
 							alert( "Success" );
 						})
@@ -106,7 +99,7 @@
 						})
 						.always(function() {
 							alert( "Send the Task" );
-						});*/
+						});
 					});
 				}, false);
 				
